@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <input type="text" name="" id="input" placeholder="Enter a task" />
+    <button onclick="AddTodo()">Add Todo!</button>
+    <button onclick="deleteLastTodo()">Delete Last Todo</button>
+    <button onclick="deleteFirstTodo()">Delete First Todo</button>
+    <div id="todos"></div>
+
+    <script>
+      let todos = [];
+
+      function AddTodo() {
+        const inputValue = document.querySelector("#input").value;
+        if (inputValue.trim() !== "") {
+          todos.push({
+            title: inputValue,
+          });
+          document.querySelector("#input").value = ""; // Clear the input
+          render();
+        } else {
+          alert("Please enter a task.");
+        }
+      }
+
+      function deleteFirstTodo() {
+        if (todos.length > 0) {
+          todos.splice(0, 1); // Remove the first todo
+          render();
+        }
+      }
+
+      function deleteLastTodo() {
+        if (todos.length > 0) {
+          todos.pop(); // Remove the last todo
+          render();
+        }
+      }
+
+      function deleteTodo(index) {
+        todos.splice(index, 1); // Remove the todo at the given index
+        render();
+      }
+
+      function createTodocomponent(todo, index) {
+        const divEl = document.createElement("div");
+        divEl.setAttribute("id", `todo-${index}`); // Unique ID using index
+
+        const h1El = document.createElement("h1");
+        h1El.innerHTML = todo.title;
+
+        const buttonEl = document.createElement("button");
+        buttonEl.setAttribute("onclick", `deleteTodo(${index})`); // Pass index to deleteTodo
+        buttonEl.innerHTML = "Delete Todo!";
+
+        divEl.appendChild(h1El);
+        divEl.appendChild(buttonEl);
+
+        return divEl;
+      }
+
+      function render() {
+        const todosContainer = document.getElementById("todos");
+        todosContainer.innerHTML = ""; // Clear the container
+        for (let i = 0; i < todos.length; i++) {
+          const element = createTodocomponent(todos[i], i);
+          todosContainer.appendChild(element);
+        }
+      }
+    </script>
+  </body>
+</html>

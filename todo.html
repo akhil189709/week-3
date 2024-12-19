@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="input" placeholder="enter the todo here" />
+    <button onclick="AddTodo()">Add todo</button>
+
+    <script>
+      let index = 1;
+      function AddTodo() {
+        const inputVal = document.getElementById("input").value;
+        const newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "div-" + index);
+        newDiv.innerHTML = `<div>${inputVal}</div><button onclick="deleteTodo(${index})">Delete</button>`;
+        document.querySelector("body").appendChild(newDiv);
+        index++;
+      }
+      function deleteTodo(index) {
+        let element = document.getElementById(`div-${index}`);
+        element.parentNode.removeChild(element);
+      }
+    </script>
+  </body>

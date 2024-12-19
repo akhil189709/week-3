@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="" placeholder="enter todo here!" />
+     <button onclick="AddTodo()">Add todo!</button>
+
+    <script>
+      function AddTodo() {
+        const inputvalue = document.querySelector("input").value;
+        const spanEl = document.createElement("span");
+        const buttonEl = document.createElement("button");
+        spanEl.innerHTML = inputvalue;
+        buttonEl.innerHTML = "Delete!";
+        //
+        const divEl = document.createElement("div");
+        divEl.appendChild(spanEl);
+        divEl.appendChild(buttonEl);
+
+        ///
+        document.querySelector("body").appendChild(divEl);
+      }
+    </script>
+  </body>
+</html>
